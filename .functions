@@ -1,0 +1,75 @@
+# partly copied from https://github.com/mathiasbynens/dotfiles
+
+# Create a new directory and enter it
+function md() {
+	mkdir -p "$@" && cd "$@"
+}
+
+# Find process for a specific key word
+function psg() {
+	ps ax | grep $1 | grep -v grep;
+}
+
+# Recursive grep for a specific file type (or * if not provided)
+function findp() {
+	if [ -z "$2" ]; then
+		path="*"
+	else
+		path="*.$2"
+	fi
+	find . -iname "$path" -type f -exec egrep -niH "$1" {} \;;
+}
+
+# Recursive find file
+function findr() {
+	if [ "$1" ]; then
+		find . -type f -iname "$1"
+	fi
+}
+
+# Count number of files for a specific file type (or * if not provided)
+function count() {
+	if [ "$1" ]; then
+		path="*.$1"
+		findr "$path" | wc -l
+	fi
+}
+
+# Finds a file and displays it in vim-less mode
+function mfs() {
+    $VIM_LESS `findr $1`
+}
+
+# Cd into a project relativ to ~/Development/comerge
+function dev() {
+	cd ~/comerge/$1
+}
+
+# Open a tunnel on a specfic port ($2) to a specific host ($1)
+function tunnel() {
+    if [ $2 -le 999 ]; then
+        sudo ssh -f -N -L $2:localhost:$2 $1;
+    else
+        ssh -f -N -L $2:localhost:$2 $1;
+    fi
+}
+
+# Find class in jar
+function class_in_jar() {
+    for f in `find . -name $2'*.jar'`; do echo $f && jar tvf $f | grep -i $1; done
+}
+
+# Go up until string 'src' is not found in path
+function cdp() {
+    while [[ $PWD == *src* ]]; do
+        cd ..
+    done
+}
+
+# Use Git’s colored diff when available
+hash git &>/dev/null
+if [ $? -eq 0 ]; then
+	function diff() {
+		git diff --no-index --color-words "$@"
+	}
+fi

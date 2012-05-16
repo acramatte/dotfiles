@@ -1,0 +1,22 @@
+# partly copied from https://github.com/mathiasbynens/dotfiles
+
+export TERM=xterm-256color
+export CLICOLOR=1
+export LSCOLORS="dxgxfxfxcxdxxxxxxxxxxx"
+
+export MAGENTA=$(tput setaf 9)
+export ORANGE=$(tput setaf 172)
+export GREEN=$(tput setaf 190)
+export WHITE=$(tput setaf 256)
+export BOLD=$(tput bold)
+export RESET=$(tput sgr0)
+
+function parse_git_dirty() {
+	[[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+}
+
+function parse_git_branch() {
+	git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/\1$(parse_git_dirty)/"
+}
+
+PS1="\[$GREEN\]\u\[$ORANGE\]\$([[ -n \$(git branch 2> /dev/null) ]] && echo \" (\")\$(parse_git_branch)\$([[ -n \$(git branch 2> /dev/null) ]] && echo \")\")\[$RESET\] \w>\$ "

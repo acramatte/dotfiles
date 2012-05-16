@@ -1,0 +1,29 @@
+# partly copied from https://github.com/mathiasbynens/dotfiles
+
+# Easier navigation: .., ..., ~ and -
+alias ..="cd .."
+alias ...="cd ../.."
+alias -- -="cd -"
+
+# Shortcuts
+alias p="cd ~/comerge"
+alias m="less -XM"
+alias h="history | egrep"
+alias mv="mv -i"
+alias cp="cp -i"
+alias rm="rm -i"
+alias vi="vim"
+alias which="type -a"
+
+# ls Shortcuts
+alias ls="ls -F"
+alias ll="ls -l"
+alias la="ls -a"
+alias l="ls -la"
+alias l.="ls -lad .*"
+alias lsd='ls -l | grep "^d"'
+alias ms="$VIM_LESS"
+
+# Hibernation
+alias hibernateon="sudo pmset -a hibernatemode 5"
+alias hibernateoff="sudo pmset -a hibernatemode 3"

@@ -1,0 +1,4 @@
+# partly copied from https://github.com/mathiasbynens/dotfiles
+
+# Automatically normalize line endings for all text-based files
+* text=auto
