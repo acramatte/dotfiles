@@ -73,3 +73,8 @@ if [ $? -eq 0 ]; then
 		git diff --no-index --color-words "$@"
 	}
 fi
+
+# Git revision references for Origo
+function rev() {
+    git log --pretty=oneline | grep "#"$1 | awk '{ print "{{r|"$1"}}," }'
+}
