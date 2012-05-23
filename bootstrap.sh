@@ -18,7 +18,8 @@ fi
 unset doIt
 
 if [ ! -d ~/.vim ]; then
-    mkdir ~/.vim
+    mkdir -p ~/.vim/backups
+    mkdir -p ~/.vim/swaps
 fi
 
 echo
