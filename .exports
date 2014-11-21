@@ -27,3 +27,16 @@ export VIM_LESS=`find /usr/share/vim -name 'vim[0-9][0-9]'`/macros/less.sh
 
 # Don't know why I used that...
 export LD_LIBRARY_PATH=/usr/lib:/usr/X11R6/lib
+
+# Prefer US English and use UTF-8
+export LANG="en_US.UTF-8";
+export LC_ALL="en_US.UTF-8";
+
+# Highlight section titles in manual pages
+export LESS_TERMCAP_md="${yellow}";
+
+# Don’t clear the screen after quitting a manual page
+export MANPAGER="less -X";
+
+# Always enable colored `grep` output
+export GREP_OPTIONS="--color=auto";
